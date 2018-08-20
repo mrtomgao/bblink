@@ -8,15 +8,27 @@ $(document).ready(function() {
     var count = data.length;
     for (i = 0; i < count; i++) {
 	   var createDate = new Date(data[i].Created_date);
-	   var offset = 0;
-	   if (data[i].user == me) {
-	   	offset = 10;
-	   }
-	   $("<div id=" + data[i]._id + ">").appendTo("#idReader");
-       $("<kbd>" + data[i].user + "</kbd>").appendTo("#idReader");
-       $("<sub>    " +timeAgo(createDate) + " ago</sub>").appendTo("#idReader");
-       $("<br/><span class=text-primary>" + data[i].body + "</span>").appendTo("#idReader");              
-       $("</div>").appendTo("#idReader");
+	   var msgbody = "";
+     if (data[i].user != me) 
+     {
+        msgBody = "<div id=" + data[i]._id + " class=incoming_msg>" +
+                  "<div class=incoming_msg_img><img src=https://mrtomgao.github.io/hello/images/avatar.png></div>" +
+                  "<div class=received_msg>" +
+                  "<div class=received_withd_msg>" +
+                  "<p>" + data[i].body + "</p>" +
+                  "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
+                  "</div></div></div>";
+	   } 
+     else 
+     {
+        msgBody = "<div id=" + data[i]._id + " class=outgoing_msg>" +                  
+                  "<div class=sent_msg_img><img src=https://mrtomgao.github.io/hello/images/avatar.png></div>" +                                  
+                  "<div class=sent_msg>" +
+                  "<p>" + data[i].body + "</p>" +
+                  "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
+                  "</div></div>";
+     }
+        $(msgBody).appendTo("#idReader");
     }
     });
 });
