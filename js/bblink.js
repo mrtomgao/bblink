@@ -1,36 +1,35 @@
 $(document).ready(function() {
     
-    var me = 'raekwon';
+    loadMessages();
 
-    $.ajax({
-        url: "https://bblink.azurewebsites.net/msg"
-    }).then(function(data) {
-    var count = data.length;
-    for (i = 0; i < count; i++) {
-	   var createDate = new Date(data[i].Created_date);
-	   var msgbody = "";
-     if (data[i].user != me) 
-     {
-        msgBody = "<div id=" + data[i]._id + " class=incoming_msg>" +
-                  "<div class=incoming_msg_img><img src=https://mrtomgao.github.io/hello/images/avatar.png></div>" +
-                  "<div class=received_msg>" +
-                  "<div class=received_withd_msg>" +
-                  "<p>" + data[i].body + "</p>" +
-                  "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
-                  "</div></div></div>";
-	   } 
-     else 
-     {
-        msgBody = "<div id=" + data[i]._id + " class=outgoing_msg>" +                  
-                  "<div class=sent_msg_img><img src=https://mrtomgao.github.io/hello/images/avatar.png></div>" +                                  
-                  "<div class=sent_msg>" +
-                  "<p>" + data[i].body + "</p>" +
-                  "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
-                  "</div></div>";
-     }
-        $(msgBody).appendTo("#idReader");
-    }
+    $("#idSend").click(function() {
+      if ($("#idMessageBox").val().trim() == '') {
+        alert('blank');
+      }
+      else 
+      {
+
+          $.ajax({
+             type: "POST",
+             contentType: "application/x-www-form-urlencoded",
+             url: "https://bblink.azurewebsites.net/msg",     
+             data: { body: $("#idMessageBox").val().trim(), user: "raekwon", channel: "lockedtite" },
+             success: function(data) {
+                loadMessages();
+                  $("#idMessageBox").val('');
+              },
+              error: function(data) {
+                  console.log("error ", data.error);
+              },
+              dataType: "json"               
+          });
+
+      }
+
+
+
     });
+
 });
 
 function timeAgo(date) {
@@ -58,4 +57,42 @@ function timeAgo(date) {
     return interval + " minutes";
   }
   return Math.floor(seconds) + " seconds";
+}
+
+function loadMessages() {
+
+    var me = 'raekwon';
+    $("#idReader").empty();
+
+    $.ajax({
+        url: "https://bblink.azurewebsites.net/msg"
+    }).then(function(data) {
+    var count = data.length;
+    for (i = 0; i < count; i++) {
+     var createDate = new Date(data[i].Created_date);
+     var msgbody = "";
+     if (data[i].user != me) 
+     {
+        msgBody = "<div id=" + data[i]._id + " class=incoming_msg>" +
+                  "<div class=incoming_msg_img><img src=https://mrtomgao.github.io/hello/images/avatar.png></div>" +
+                  "<div class=received_msg>" +
+                  "<div class=received_withd_msg>" +
+                  "<p>" + data[i].body + "</p>" +
+                  "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
+                  "</div></div></div>";
+     } 
+     else 
+     {
+        msgBody = "<div id=" + data[i]._id + " class=outgoing_msg>" +                  
+                  "<div class=sent_msg_img><img src=https://mrtomgao.github.io/hello/images/avatar.png></div>" +                                  
+                  "<div class=sent_msg>" +
+                  "<p>" + data[i].body + "</p>" +
+                  "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
+                  "</div></div>";
+     }
+        $(msgBody).appendTo("#idReader");
+        $('#idReader').scrollTop($('#idReader')[0].scrollHeight);
+    }
+    });
+
 }
