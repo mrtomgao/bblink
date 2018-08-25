@@ -16,12 +16,12 @@ $(document).ready(function() {
         bbUserJson = [];
 
         item = {}
-        item ["username"] = $('#lg_username').val();
-        item ["room"] = $('#lg_room').val();
-        item ["avatar"] = $('#lg_avatar').val();
+        item ["username"] = username;
+        item ["room"] = room;
+        item ["avatar"] = avatar;
         bbUserJson.push(item);
         
-        $.cookie("bbUser", JSON.stringify(bbJson));
+        $.cookie("bbUser", JSON.stringify(bbUserJson));
 
         if (typeof $.cookie('bbUser') != 'undefined')
         {
