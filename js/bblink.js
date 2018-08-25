@@ -4,10 +4,9 @@ $(document).ready(function() {
     // similar behavior as an HTTP redirect
     window.location.replace("login.html");
 	} else {
-		alert('yesCookie');
+
 	}
-	
-	
+		
     loadMessages();
 
     $("#idSend").click(function() {
@@ -16,7 +15,6 @@ $(document).ready(function() {
       }
       else 
       {
-
           $.ajax({
              type: "POST",
              contentType: "application/x-www-form-urlencoded",
@@ -31,11 +29,7 @@ $(document).ready(function() {
               },
               dataType: "json"               
           });
-
       }
-
-
-
     });
 
 });
