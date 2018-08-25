@@ -1,5 +1,13 @@
 $(document).ready(function() {
     
+	if (typeof $.cookie('bbUser') === 'undefined'){
+    // similar behavior as an HTTP redirect
+    window.location.replace("login.html");
+	} else {
+		alert('yesCookie');
+	}
+	
+	
     loadMessages();
 
     $("#idSend").click(function() {
@@ -12,7 +20,7 @@ $(document).ready(function() {
           $.ajax({
              type: "POST",
              contentType: "application/x-www-form-urlencoded",
-             url: "https://bblink.azurewebsites.net/msg",     
+             url: "https://bblinkapi.azurewebsites.net/msg",     
              data: { body: $("#idMessageBox").val().trim(), user: "raekwon", channel: "lockedtite" },
              success: function(data) {
                 loadMessages();
@@ -65,7 +73,7 @@ function loadMessages() {
     $("#idReader").empty();
 
     $.ajax({
-        url: "https://bblink.azurewebsites.net/msg"
+        url: "https://bblinkapi.azurewebsites.net/msgafter"
     }).then(function(data) {
     var count = data.length;
     for (i = 0; i < count; i++) {
