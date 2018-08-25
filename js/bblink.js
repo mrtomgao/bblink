@@ -1,5 +1,10 @@
 $(document).ready(function() {
-    
+
+  var bbUser = {};
+      bbUser ["username"] = "tomgao"
+      bbUser ["room"] = "chill"
+      bbUser ["avatar"] = "http://www.lol.com/img.png"
+
 	if (typeof $.cookie('bbUser') === 'undefined'){
     // similar behavior as an HTTP redirect
     window.location.replace("login.html");

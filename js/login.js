@@ -1,26 +1,32 @@
 $(document).ready(function() {
   // Form Submission
-  $("#login-form").submit(function() {        
+  $("#lg_submit").click(function() {        
     
       var username = $('#lg_username').val();
       var room = $('#lg_room').val();
       var avatar = $('#lg_avatar').val();
-      
+
       if (username != '' && room != '' && avatar != '') 
       {
-        jsonObj = [];
+        //clear the form
+        $('#lg_username').val('');
+        $('#lg_room').val('');
+        $('#lg_avatar').val('');        
+
+        bbUserJson = [];
 
         item = {}
         item ["username"] = $('#lg_username').val();
         item ["room"] = $('#lg_room').val();
         item ["avatar"] = $('#lg_avatar').val();
-        jsonObj.push(item);
+        bbUserJson.push(item);
         
-        $.cookie("bbUser", JSON.stringify(jsonObj));
+        $.cookie("bbUser", JSON.stringify(bbJson));
 
         if (typeof $.cookie('bbUser') != 'undefined')
         {
-          alert('cookie exists lets go!!!')
+          //good to go!!
+          window.location.replace("index.html");
         }
         else
         {
