@@ -17,7 +17,15 @@ $(document).ready(function() {
         jsonObj.push(item);
         
         $.cookie("bbUser", JSON.stringify(jsonObj));
-        alert($.cookie("bbUser"));
+
+        if (typeof $.cookie('bbUser') != 'undefined')
+        {
+          alert('cookie exists lets go!!!')
+        }
+        else
+        {
+          alert('error creating login object');
+        }
       }
       else 
       {
