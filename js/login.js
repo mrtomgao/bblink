@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+  $.removeCookie("bbUser");
+  console.log("Current login cookie is: " + $.cookie("bbUser"));
   $("#lg_submit").click(function() {        
 
       var username = $('#lg_username').val();
