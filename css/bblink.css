@@ -2,7 +2,7 @@ html,
 body {
   background: #efefef;
   padding: 10px;
-  font-family: 'Varela Round';
+  font-family: 'Open Sans', sans-serif;
 }
 /*=== 2. Anchor Link ===*/
 a {
@@ -79,12 +79,12 @@ a:hover {
   margin-top: -25px;
   border: 5px solid #efefef;
   border-radius: 50%;
-  transition: all ease-in-out 500ms;
+  transition: all ease-in-out 300ms;
 }
 .login-form-1 .login-button:hover {
   color: #ffffff;
   background: #a0e4ff;
-  transform: rotate(720deg);
+  /*transform: rotate(720deg);*/
 }
 .login-form-1 .login-button.clicked {
   color: #555555;
@@ -360,8 +360,8 @@ img{ max-width:100%;}
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
-  padding: 30px 15px 0 25px;
-  width: 60%;
+  padding: 10px 10px 10px 10pxpx;
+  width: 100%;
 }
 
 .sent_msg_img {
@@ -405,9 +405,31 @@ img{ max-width:100%;}
   right: 0;
   top: 11px;
   width: 33px;
+  transition: all ease-in-out 300ms;    
 }
-.messaging { padding: 0 0 50px 0;}
+.messaging { padding: 0 0 0px 0;}
 .msg_history {
-  height: 516px;
+  height: 80%;
   overflow-y: auto;
+}
+.user_controls {
+  float: right;
+}
+.logout_btn {
+  background: #aaaaaa none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 16px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  height: 33px;
+  right: 0;
+  top: 11px;
+  width: 80px;
+  transition: all ease-in-out 200ms;  
+}
+.logout_btn:hover {
+  color: #ffffff;
+  background: #a0e4ff;
+  /*transform: rotate(720deg);*/
 }

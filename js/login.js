@@ -7,9 +7,18 @@ $(document).ready(function() {
       var avatar = $('#lg_avatar').val();
 
       if (username != '' && room != '' && avatar != '') 
-      {
+      {        
+        //check for valid avatar URL if not then change to blank
+        $.get({
+          url: avatar,
+          async: false
+        }).done(function() { 
+          //positive condition     
+        }).fail(function() { 
+          //negative condition
+          avatar = '';
+        })        
 
-        
         bbUser = {}
         bbUser ["username"] = username;
         bbUser ["room"] = room;

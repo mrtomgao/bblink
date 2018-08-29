@@ -3,46 +3,14 @@
     <title>bblink alpha 0.01</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>    
     <link href="css/bblink.css" type="text/css" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">    
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>    
   </head>
   <body>
     <div class="container">
-      <h3 class=" text-center">Channel Name</h3>
+      <div class="user_controls"><button class="logout_btn" id="idLogout" type="button"><i class="fa fa-hand-peace-o" aria-hidden="true"></i> &nbsp; see ya</button></div>
+      <div class="logo text-center">bbLink <span class="logo_sml">by Tgao</span></div>      
       <div class="messaging">
-        <div class="inbox_msg">
-          <div class="inbox_people">
-            <div class="headind_srch">
-              <div class="recent_heading">
-                <h4>Channel</h4>
-              </div>
-              <div class="srch_bar">
-                <div class="stylish-input-group">
-                  <input type="text" class="search-bar"  placeholder="Join channel..." >
-                  <span class="input-group-addon">
-                    <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                  </span> </div>
-                </div>
-              </div>
-              <div class="inbox_chat">
-                <div class="chat_list active_chat">
-                  <div class="chat_people">
-                    <div class="chat_img"> <img src="https://mrtomgao.github.io/hello/images/avatar.png"> </div>
-                    <div class="chat_ib">
-                      <h5>LockedTite<span class="chat_date">Last post: Just now</span></h5>
-                      <p>users online: 2</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="chat_list">
-                  <div class="chat_people">
-                    <div class="chat_img"> <img src="https://mrtomgao.github.io/hello/images/avatar.png"> </div>
-                    <div class="chat_ib">
-                      <h5>hehechat<span class="chat_date">Last post: 2 days ago</span></h5>
-                      <p>users online: 0</p>
-                    </div>
-                  </div>
-                </div>          
-              </div>
-            </div>
             <div class="mesgs">
               <div class="msg_history" id="idReader">
                 <!-- Message javascript appends here -->
@@ -50,16 +18,14 @@
               <div class="type_msg">
                 <div class="input_msg_write">
                   <input type="text" class="write_msg" placeholder="Type a message" id="idMessageBox" />
-                  <button class="msg_send_btn" id="idSend" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                  <button class="msg_send_btn" id="idSend" type="button"><i class="fa fa-comment-o" aria-hidden="true"></i></button>
                 </div>
               </div>
+
             </div>
-          </div>
 
-
-          <p class="text-center top_spac"> bbLink by <a target="_blank" href="#">♡Tgao, ♡Shou</a></p>
-
-        </div></div>
+        </div>
+    </div>
         <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
