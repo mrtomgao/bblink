@@ -86,6 +86,7 @@
     //Logout
     $("#idLogout").click(function() {      
       bbUser = null;
+      $.cookie("bbUser", null, {expires: -100, path: '/'});
       $.removeCookie("bbUser", { path: '/' });
       window.location.replace("login.html");
     });     
