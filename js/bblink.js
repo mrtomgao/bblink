@@ -63,11 +63,14 @@
       //clear textbox immediately
       $("#idMessageBox").val('');      
       if (msgbody != '') {
-        postNewMsg(bbUser, msgbody).done(function (result) {          
+        $(".msg_send_btn").toggleClass("msg_send_btn_clicked");
+        postNewMsg(bbUser, msgbody).done(function (result) {  
+
+          $(".msg_send_btn").removeClass("msg_send_btn_clicked");
           //reset pulse and activity level
           clearTimeout(pulseTimeOut);    
           pulseActivity = 0;
-
+          $(".msg_send_btn").fadeIn("slow");
           //re-esetablish pulse
           (function pulse() {                
               buildMsgList();
