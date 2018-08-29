@@ -23,7 +23,7 @@ $(document).ready(function() {
         bbUser ["username"] = username;
         bbUser ["room"] = room;
         bbUser ["avatar"] = avatar;
-        $.cookie("bbUser", JSON.stringify(bbUser));
+        $.cookie("bbUser", JSON.stringify(bbUser), {expires: 365, path: '/'});
 
         if (typeof $.cookie("bbUser") != 'undefined')
         {
