@@ -1,3 +1,7 @@
+  window.onfocus = window.onblur = function(e) {
+      document.title = 'bblink..(-_-)..zZZ';
+  }
+
   $(document).ready(function() {
     
     var bbUser;
@@ -35,12 +39,16 @@
               pulseSinceNew = 0;
               pulseActivity = 0;
               console.log('added to msgExisting: ' + obj._id);
+              //alert browser title
+              if (bbUser.username != obj.username) {
+                document.title = 'bblink (o_o) NewMsg!!!';
+              }            
             }                       
           });            
           console.log('Get complete (' + pulseRates[pulseActivity] + ')');
         });      
 
-        //2. pulse algorithm in to determine activity spikes
+        //2. pulse calculator to determine activity spikes
         if (pulseSinceNew >= 10) {
           console.log('activity lvl change to: ' + pulseActivity);
           if (pulseActivity < pulseRates.length) { pulseActivity++; }
@@ -52,7 +60,7 @@
     }
 
     //set an outer pulse for the app to loop on.   
-    (function pulse() {            
+    (function pulse() {   
         buildMsgList();
         pulseTimeOut = setTimeout(pulse, pulseRates[pulseActivity]);
     })();
@@ -96,8 +104,8 @@
 
   });
 
-//#### Begin External Functions #### //
-function containsMsgID(obj, list) {
+  //#### Begin External Functions #### //
+  function containsMsgID(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
         if (list[i]._id === obj._id) {
@@ -105,45 +113,44 @@ function containsMsgID(obj, list) {
         }
     }
     return false;
-}
+  }
 
-function timeAgo(date) {
+  function timeAgo(date) {
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var interval = Math.floor(seconds / 31536000);
 
-  var seconds = Math.floor((new Date() - date) / 1000);
-  var interval = Math.floor(seconds / 31536000);
+    if (interval > 1) {
+      return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+      return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
 
-  if (interval > 1) {
-    return interval + " years";
-  }
-  interval = Math.floor(seconds / 2592000);
-  if (interval > 1) {
-    return interval + " months";
-  }
-  interval = Math.floor(seconds / 86400);
-  if (interval > 1) {
-    return interval + " days";
-  }
-  interval = Math.floor(seconds / 3600);
-  if (interval > 1) {
-    return interval + " hours";
-  }
-  interval = Math.floor(seconds / 60);
-  if (interval > 1) {
-    return interval + " minutes";
-  }
-  return Math.floor(seconds) + " seconds";
-}
-
-function getNewMsg(bbUser, startDate) {
+  function getNewMsg(bbUser, startDate) {
   startDate.setSeconds(startDate.getSeconds() - 20);
   return $.ajax
     ({
       url: "https://bblinkapi.azurewebsites.net/msg",      
       headers: {"startdate": startDate.toISOString(), "room": bbUser.room}
     });
-}
+  }
 
-function postNewMsg(bbUser, msgbody) {
+  function postNewMsg(bbUser, msgbody) {
   return $.ajax({
     type: "POST",
     contentType: "application/x-www-form-urlencoded",
@@ -153,38 +160,39 @@ function postNewMsg(bbUser, msgbody) {
      error: function(data) { console.log("error ", data.error); },
      dataType: "json" 
    });
-}
-
-function pushHTML(bbUser, obj) {
-  var createDate = new Date(obj.Created_date);
-  var showAvatarHtml = '';
-
-  if (obj.avatar != '') {
-    showAvatarHtml = "<img src=" + obj.avatar + ">";
   }
 
-   if (obj.username != bbUser.username) 
-   {
-    msgBody = "<div id=" + obj._id + " class=incoming_msg>" +
-    "<div class=incoming_msg_img>" + showAvatarHtml + "</div>" +
-    "<div class=received_msg>" +
-    "<div class=received_withd_msg>" +
-    "<p>" + obj.body + "</p>" +
-    "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
-    "</div></div></div>";
-  } 
-  else 
-  {
-    msgBody = "<div id=" + obj._id + " class=outgoing_msg>" +                  
-    "<div class=sent_msg_img>" + showAvatarHtml + "</div>" +                                  
-    "<div class=sent_msg>" +
-    "<p>" + obj.body + "</p>" +
-    "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
-    "</div></div>";
+  function pushHTML(bbUser, obj) {
+    var createDate = new Date(obj.Created_date);
+    var showAvatarHtml = '';
+
+    if (obj.avatar != '') {
+      showAvatarHtml = "<img src=" + obj.avatar + ">";
+    }
+
+     if (obj.username != bbUser.username) 
+     {
+      msgBody = "<div id=" + obj._id + " class=incoming_msg>" +
+      "<div class=incoming_msg_img>" + showAvatarHtml + "</div>" +
+      "<div class=received_msg>" +
+      "<div class=received_withd_msg>" +
+      "<p>" + obj.body + "</p>" +
+      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
+      "</div></div></div>";
+    } 
+    else 
+    {
+      msgBody = "<div id=" + obj._id + " class=outgoing_msg>" +                  
+      "<div class=sent_msg_img>" + showAvatarHtml + "</div>" +                                  
+      "<div class=sent_msg>" +
+      "<p>" + obj.body + "</p>" +
+      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
+      "</div></div>";
+    }
+    $(msgBody).hide().appendTo("#idReader").fadeIn('slow');
+    $('#idReader').scrollTop($('#idReader')[0].scrollHeight);
   }
-  $(msgBody).hide().appendTo("#idReader").fadeIn('slow');
-  $('#idReader').scrollTop($('#idReader')[0].scrollHeight);
-}
+
 
 
 //#### End External Functions #### //
