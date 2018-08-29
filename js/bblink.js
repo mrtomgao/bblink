@@ -81,7 +81,14 @@
       if (e.keyCode == 13) {
         $('#idSend').trigger("click");
       }
-    });    
+    });   
+
+    //Logout
+    $("#idLogout").click(function() {      
+      bbUser = null;
+      $.cookie("bbUser", null, { path: '/' });
+      window.location.replace("login.html");
+    });     
 
   });
 

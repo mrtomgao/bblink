@@ -15,7 +15,7 @@ $(document).ready(function() {
         }).done(function() { 
           //positive condition     
         }).fail(function() { 
-          //negative condition
+          //negative
           avatar = '';
         })        
 
