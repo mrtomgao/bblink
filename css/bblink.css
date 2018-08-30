@@ -68,22 +68,33 @@ a:hover {
 }
 /*=== 5. Login Button ===*/
 .login-form-1 .login-button {
+  background-size: 100% auto;
   position: absolute;
   right: -25px;
-  top: 50%;
-  background: #ffffff;
+  top: 140px;
   color: #999999;
-  padding: 11px 0;
+  padding: 6px 0;
   width: 50px;
   height: 50px;
   margin-top: -25px;
-  border: 5px solid #efefef;
+  border: 2px solid #efefef;
   border-radius: 50%;
   transition: all ease-in-out 300ms;
 }
+
 .login-form-1 .login-button:hover {
-  color: #ffffff;
-  background: #a0e4ff;
+  background-size: 100% auto;
+  position: absolute;
+  right: -30px;
+  top: 135px;
+  color: #5CB6DF;
+  padding: 6px 0;
+  width: 60px;
+  height: 60px;
+  margin-top: -25px;
+  border: 4px solid #5CB6DF;
+  border-radius: 50%;
+  cursor: pointer;
   /*transform: rotate(720deg);*/
 }
 .login-form-1 .login-button.clicked {
@@ -150,114 +161,7 @@ label.form-invalid:after {
 .login-form-main-message.error {
   border-left-color: #e74c3c;
 }
-/*=== 8. Custom Checkbox & Radio ===*/
-/* Base for label styling */
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked,
-[type="radio"]:not(:checked),
-[type="radio"]:checked {
-  position: absolute;
-  left: -9999px;
-}
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label,
-[type="radio"]:not(:checked) + label,
-[type="radio"]:checked + label {
-  position: relative;
-  padding-left: 25px;
-  padding-top: 1px;
-  cursor: pointer;
-}
-/* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before,
-[type="radio"]:not(:checked) + label:before,
-[type="radio"]:checked + label:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 17px;
-  height: 17px;
-  border: 0px solid #aaa;
-  background: #f0f0f0;
-  border-radius: 3px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-/* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after,
-[type="radio"]:not(:checked) + label:after,
-[type="radio"]:checked + label:after {
-  position: absolute;
-  color: #555555;
-  transition: all .2s;
-}
-/* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after,
-[type="radio"]:not(:checked) + label:after {
-  opacity: 0;
-  transform: scale(0);
-}
-[type="checkbox"]:checked + label:after,
-[type="radio"]:checked + label:after {
-  opacity: 1;
-  transform: scale(1);
-}
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before,
-[type="radio"]:disabled:not(:checked) + label:before,
-[type="radio"]:disabled:checked + label:before {
-  box-shadow: none;
-  border-color: #8c8c8c;
-  background-color: #878787;
-}
-[type="checkbox"]:disabled:checked + label:after,
-[type="radio"]:disabled:checked + label:after {
-  color: #555555;
-}
-[type="checkbox"]:disabled + label,
-[type="radio"]:disabled + label {
-  color: #8c8c8c;
-}
-/* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before,
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-  border: 1px dotted #f6f6f6;
-}
-/* hover style just for information */
-label:hover:before {
-  border: 1px solid #f6f6f6 !important;
-}
-/*=== Customization ===*/
-/* radio aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
-  border-radius: 3px;
-}
-[type="radio"]:not(:checked) + label:before,
-[type="radio"]:checked + label:before {
-  border-radius: 35px;
-}
-/* selected mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
-  content: '✔';
-  top: 0;
-  left: 2px;
-  font-size: 14px;
-}
-[type="radio"]:not(:checked) + label:after,
-[type="radio"]:checked + label:after {
-  content: '\2022';
-  top: 0;
-  left: 3px;
-  font-size: 30px;
-  line-height: 25px;
-}
+
 /*=== 9. Misc ===*/
 .logo {
   font-size: 25px;

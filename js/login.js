@@ -1,26 +1,23 @@
 $(document).ready(function() {
+  $('#lg_username').val('');
+  $('#lg_room').val('');
+  $('#lg_avatar').val('');  
   $.removeCookie("bbUser");
   console.log("Current login cookie is: " + $.cookie("bbUser"));
+
+  $('#lg_avatar').on('input',function(e){
+    $("#idAvatarImg").attr("src", $('#lg_avatar').val().trim());
+  });
+
   $("#lg_submit").click(function() {        
 
-      var username = $('#lg_username').val();
-      var room = $('#lg_room').val();
-      var avatar = $('#lg_avatar').val();
+      var username = $('#lg_username').val().trim();
+      var room = $('#lg_room').val().trim();
+      var avatar = $('#lg_avatar').val().trim();
 
       if (username != '' && room != '' && avatar != '') 
       {        
-        //check for valid avatar URL if not then change to blank
-        $.get({
-          url: avatar,
-          async: false
-        }).done(function() { 
-          //positive condition     
-        }).fail(function() { 
-          //negative
-          avatar = '';
-        })        
-
-        bbUser = {}
+        var bbUser = {}
         bbUser ["username"] = username;
         bbUser ["room"] = room;
         bbUser ["avatar"] = avatar;
@@ -40,7 +37,17 @@ $(document).ready(function() {
       {
           alert('all fields are required bro.')
       }
-  });  
-
+  });
 });
 
+function avatarOK() {
+  console.log('avatar loaded ok');
+  $("#lg_submit").fadeIn('slow');
+  $(".login-button").css('background-image', "url('" + $('#lg_avatar').val().trim() + "')");
+
+}
+
+function avatarBad() {
+  console.log('avatar bad');
+  $("#lg_submit").hide();
+}
