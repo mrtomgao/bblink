@@ -239,6 +239,7 @@ img{ max-width:100%;}
 .incoming_msg_img {
   display: inline-block;
   width: 6%;
+  vertical-align: bottom;
 }
 .received_msg {
   display: inline-block;
@@ -286,6 +287,7 @@ img{ max-width:100%;}
   float: right;
   display: inline-block;
   width: 6%;
+  border: 1px solid red;
 }
 
  .sent_msg p {
