@@ -3,14 +3,14 @@
   }
 
   $(document).ready(function() {
-    
     var bbUser;
     if (typeof $.cookie('bbUser') === 'undefined'){
       // similar behavior as an HTTP redirect
       window.location.replace("login.html");
-    } else {
+    } else {      
       console.log("Current login cookie is: " + $.cookie("bbUser"));
       bbUser = JSON.parse($.cookie('bbUser'));
+      $("body").fadeIn(1000);
     }
 
     $("#idMessageBox").val('');
@@ -18,7 +18,7 @@
     var msgNew = [];
     
     var dtLastGet = new Date();
-        dtLastGet.setDate(dtLastGet.getDate()-7);
+        dtLastGet.setDate(dtLastGet.getDate()-2);
 
     console.log('bblink started with LastGet: ' + dtLastGet);
 
