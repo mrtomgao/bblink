@@ -41,10 +41,9 @@ $(document).ready(function() {
 });
 
 function avatarOK() {
-  console.log('avatar loaded ok');
+  console.log('avatar ok');
   $("#lg_submit").fadeIn('slow');
   $(".login-button").css('background-image', "url('" + $('#lg_avatar').val().trim() + "')");
-
 }
 
 function avatarBad() {

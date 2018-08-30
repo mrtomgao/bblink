@@ -1,5 +1,5 @@
   window.onfocus = window.onblur = function(e) {
-      document.title = 'bblink..(-_-)..zZZ';
+      document.title = 'bblink..(-_-).......zZZ';
   }
 
   $(document).ready(function() {
@@ -28,7 +28,7 @@
     var pulseActivity = 0;  
     var pulseTimeOut;
 
-    function buildMsgList() {        
+    function buildMsgList() {   
         pulseSinceNew++; 
         //1. main get async
         getNewMsg(bbUser, dtLastGet).done(function (result) {
@@ -37,14 +37,21 @@
               msgExisting.push(obj);
               pushHTML(bbUser, obj);
               pulseSinceNew = 0;
-              pulseActivity = 0;
-              console.log('added to msgExisting: ' + obj._id);
-              //alert browser title
-              if (bbUser.username != obj.username) {
-                document.title = 'bblink (o_o) NewMsg!!!';
-              }            
+              pulseActivity = 0;              
+              console.log('added to msgExisting: ' + obj._id);        
             }                       
           });            
+
+          if (pulseSinceNew == 0) {
+            //scroll to bottom smoothly when new msg
+            $('#idReader').animate({scrollTop: $('#idReader')[0].scrollHeight}, 'fast');
+            //alert browser title
+            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0) {
+              document.title = 'bblink (o_o) NewMsg!!!';
+            }  
+          }
+            
+
           console.log('Get complete (' + pulseRates[pulseActivity] + ')');
         });      
 
@@ -174,23 +181,25 @@
      {
       msgBody = "<div id=" + obj._id + " class=incoming_msg>" +
       "<div class=incoming_msg_img>" + showAvatarHtml + "</div>" +
-      "<div class=received_msg>" +
-      "<div class=received_withd_msg>" +
+      "<div class=received_msg>" +      
+      "<div class=received_withd_msg>" +            
+      "<span class=username>" + obj.username + "</span>&nbsp;" +       
+      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +           
       "<p>" + obj.body + "</p>" +
-      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
       "</div></div></div>";
     } 
     else 
     {
       msgBody = "<div id=" + obj._id + " class=outgoing_msg>" +                  
       "<div class=sent_msg_img>" + showAvatarHtml + "</div>" +                                  
-      "<div class=sent_msg>" +
-      "<p>" + obj.body + "</p>" +
-      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +
+      "<div class=sent_msg>" +     
+      "<span class=username>" + obj.username + "</span>&nbsp;" +       
+      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +         
+      "<p>" + obj.body + "</p>" +       
       "</div></div>";
     }
-    $(msgBody).hide().appendTo("#idReader").fadeIn('slow');
-    $('#idReader').scrollTop($('#idReader')[0].scrollHeight);
+    $(msgBody).appendTo("#idReader");
+    //$('#idReader').scrollTop($('#idReader')[0].scrollHeight, 5000, 'linear');    
   }
 
 
