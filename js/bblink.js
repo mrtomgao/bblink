@@ -1,5 +1,5 @@
   window.onfocus = window.onblur = function(e) {
-      document.title = 'bblink..(-_-).......zZZ';
+      document.title = 'bblink  (-_-)....zZZ';
   }
 
   $(document).ready(function() {
@@ -19,7 +19,10 @@
       $("body").fadeIn(1000);
     }
 
+    //clear the Send Message Box
     $("#idMessageBox").val('');
+    
+    var firstRun = true;  
     var msgExisting = [];
     var msgNew = [];
     
@@ -33,6 +36,7 @@
     var pulseSinceNew = 0;    
     var pulseActivity = 0;  
     var pulseTimeOut;
+    var pulseLastNotifyID;    
 
     function buildMsgList() {   
         pulseSinceNew++; 
@@ -52,9 +56,12 @@
             //scroll to bottom smoothly when new msg
             $('#idReader').animate({scrollTop: $('#idReader')[0].scrollHeight}, 'fast');
             //alert browser title
-            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0) {
-              document.title = 'bblink (o_o) NewMsg!!!';
-
+            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID) {
+              
+              document.title = 'bblink  (o_o) NewMsg!!';                                
+              console.log("before: " + pulseLastNotifyID + firstRun);
+              pulseLastNotifyID = msgExisting[msgExisting.length - 1]._id;
+              console.log("after: " + pulseLastNotifyID + firstRun);
               //push a browswer notification if supported.
               if ("Notification" in window) {
                 if (Notification.permission === "granted") {
@@ -65,10 +72,9 @@
                 }                  
               }            
             }  
-          }
-            
-
+          }            
           console.log('Get complete (' + pulseRates[pulseActivity] + ')');
+          firstRun = false;
         });      
 
         //2. pulse calculator to determine activity spikes
@@ -83,7 +89,7 @@
     }
 
     //set an outer pulse for the app to loop on.   
-    (function pulse() {   
+    (function pulse() {           
         buildMsgList();
         pulseTimeOut = setTimeout(pulse, pulseRates[pulseActivity]);
     })();
