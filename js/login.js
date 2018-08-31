@@ -1,8 +1,10 @@
 $(document).ready(function() {
+  
   $('#lg_username').val('');
   $('#lg_room').val('');
   $('#lg_avatar').val('');  
   $.removeCookie("bbUser");
+
   console.log("Current login cookie is: " + $.cookie("bbUser"));
 
   $('#lg_avatar').on('input',function(e){
@@ -44,9 +46,12 @@ function avatarOK() {
   console.log('avatar ok');
   $("#lg_submit").fadeIn('slow');
   $(".login-button").css('background-image', "url('" + $('#lg_avatar').val().trim() + "')");
+  $(".login-button-invalid").hide();
+   
 }
 
 function avatarBad() {
   console.log('avatar bad');
+  $(".login-button-invalid").show();
   $("#lg_submit").hide();
 }

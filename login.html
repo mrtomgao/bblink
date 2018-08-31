@@ -8,7 +8,7 @@
   </head>
   <body>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>  	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>  		
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>  	
     <script src="js/login.js"></script>	    	
 	<div class="text-center" style="padding:50px 0">
 		<div class="logo">bblink <span class="logo_sml">by Tgao</span></div>
@@ -32,9 +32,10 @@
 						</div>
 					</div>
 					<button type="button" id="lg_submit" class="login-button"><i class="fa fa-check"></i></button>
+					<button type="button" title="valid Avatar URL required to login!" id="lg_submit" class="login-button-invalid"><div class="showbefore"><i class="fa fa-sign-in"></i></div><div class="showafter"><i class="fa fa-times"></i> &nbsp;valid url required</div></button>					
 				</div>
 			</form>
-		</div>		
+		</div>
 		<!-- end:Main Form -->
 	</div>
 	<img src="" id="idAvatarImg" style="visibility: hidden; width: 1px; height: 1px;" onload="avatarOK()" onerror="avatarBad()"/>

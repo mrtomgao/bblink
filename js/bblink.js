@@ -42,7 +42,7 @@
             }                       
           });            
 
-          if (pulseSinceNew == 0) {
+          if (pulseSinceNew == 0 && msgExisting.length > 0) {
             //scroll to bottom smoothly when new msg
             $('#idReader').animate({scrollTop: $('#idReader')[0].scrollHeight}, 'fast');
             //alert browser title

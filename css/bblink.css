@@ -66,10 +66,12 @@ a:hover {
 .login-group-checkbox {
   padding: 5px 0;
 }
+
 /*=== 5. Login Button ===*/
-.login-form-1 .login-button {
+.login-form-1 .login-button-invalid {
   background-size: 100% auto;
   position: absolute;
+  font-size: 14px;
   right: -25px;
   top: 140px;
   color: #999999;
@@ -77,7 +79,38 @@ a:hover {
   width: 50px;
   height: 50px;
   margin-top: -25px;
-  border: 2px solid #efefef;
+  border: 2px solid #999999;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all ease-in 100ms;  
+}
+.login-form-1 .login-button-invalid:hover{
+  width: 155px;
+}
+.login-form-1 .login-button-invalid:hover .showafter{
+  display: inline-block;
+  display: inline-block;  
+  animation: fadein 500ms;
+  -moz-animation: fadein 500ms; /* Firefox */
+  -webkit-animation: fadein 500ms; /* Safari and Chrome */
+  -o-animation: fadein 500ms; /* Opera */      
+}
+.login-form-1 .login-button-invalid:hover .showbefore{
+  display: none;
+}
+
+.login-form-1 .login-button {
+  background-size: 100% auto;
+  position: absolute;
+  font-size: 12px;
+  right: -25px;
+  top: 140px;
+  color: #5CDF8B;
+  padding: 6px 0;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  border: 2px solid #5CDF8B;
   border-radius: 50%;
   transition: all ease-in-out 300ms;
 }
@@ -85,6 +118,7 @@ a:hover {
 .login-form-1 .login-button:hover {
   background-size: 100% auto;
   position: absolute;
+  font-size: 16px;
   right: -30px;
   top: 135px;
   color: #5CDF8B;
@@ -317,6 +351,10 @@ img{ max-width:100%;}
   display: none;
 }
 
+textarea:focus, input:focus, button:focus{
+    outline: none;
+}
+
 .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
 .msg_send_btn {
   background: #aaaaaa none repeat scroll 0 0;
@@ -324,13 +362,13 @@ img{ max-width:100%;}
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 12px;
   height: 33px;
   position: absolute;
   right: 0;
   top: 11px;
   width: 33px;
-  transition: all ease-in-out 300ms;    
+  transition: all ease-in-out 100ms;    
 }
 .msg_send_btn:hover {
   color: #ffffff;
@@ -338,7 +376,11 @@ img{ max-width:100%;}
 }
 
 .msg_send_btn_clicked {
+  font-size: 1px;
+  height:5px;
+  width:5px;
   top: -33px;
+  right: 33px;
   opacity: 0.0;
 }
 .messaging { padding: 0 0 0px 0;}
@@ -350,6 +392,7 @@ img{ max-width:100%;}
   float: right;
 }
 .logout_btn {
+  overflow: hidden;
   background: #aaaaaa none repeat scroll 0 0;
   border: medium none;
   border-radius: 16px;
@@ -359,11 +402,47 @@ img{ max-width:100%;}
   height: 33px;
   right: 0;
   top: 11px;
-  width: 80px;
-  transition: all ease-in-out 200ms;  
+  width: 33px;
+  transition: all 100ms ease; 
 }
 .logout_btn:hover {
   color: #ffffff;
   background: #a0e4ff;
+  width: 80px;
+  transition: all 100ms ease;
   /*transform: rotate(720deg);*/
+}
+.logout_btn:hover .showafter{
+  display: inline-block;  
+  animation: fadein 300ms;
+  -moz-animation: fadein 300ms; /* Firefox */
+  -webkit-animation: fadein 300ms; /* Safari and Chrome */
+  -o-animation: fadein 300ms; /* Opera */    
+}
+.logout_btn:hover .showbefore{
+  display: none;
+}
+.showbefore {
+  display: inline-block;
+}
+.showafter {
+  display: none;
+}
+
+/* animation keyframes */
+@keyframes fadein {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from { opacity:0; }
+    to { opacity:1; }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from { opacity:0; }
+    to { opacity:1; }
+}
+@-o-keyframes fadein { /* Opera */
+    from { opacity:0; }
+    to { opacity:1; }
 }
