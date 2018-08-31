@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+    Notification.requestPermission().then(function(result) {
+      console.log(result);
+    });
+
+    var img = '/to-do-notifications/img/icon-128.png';
+    var text = 'HEY! notification try';
+    var notification = new Notification('To do list', { body: text, icon: img });
   
   $('#lg_username').val('');
   $('#lg_room').val('');
