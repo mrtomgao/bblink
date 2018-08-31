@@ -183,12 +183,12 @@
   }
 
   function getNewMsg(bbUser, startDate) {
-  startDate.setSeconds(startDate.getSeconds() - 20);  
-  console.log(startDate);
+  startDate.setSeconds(startDate.getSeconds() - 20);
   return $.ajax
     ({
       url: "https://bblinkapi.azurewebsites.net/msg",      
-      headers: {"startdate": startDate.toISOString(), "room": bbUser.room}
+      type: "GET",
+      data: {"startdate": startDate.toISOString(), "room": bbUser.room}
     });
   }
 
