@@ -4,7 +4,7 @@ $(document).ready(function() {
       console.log(result);
     });
 
-    var img = '/to-do-notifications/img/icon-128.png';
+    var img = 'favicon.ico';
     var text = 'HEY! notification try';
     var notification = new Notification('To do list', { body: text, icon: img });
   
