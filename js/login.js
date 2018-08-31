@@ -4,7 +4,7 @@ $(document).ready(function() {
       console.log(result);
     });
 
-    var img = 'favicon.ico';
+    var img = 'bblink.ico';
     var text = 'Wassup dog haha wo ping ching chila long long bong gonb';
     var notification = new Notification('T Gizzle da Wrapper', { body: text, icon: img });
     setTimeout(notification.close.bind(notification), 4000);
