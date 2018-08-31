@@ -3,6 +3,12 @@
   }
 
   $(document).ready(function() {
+
+    //Browser Push Notifications
+    Notification.requestPermission().then(function(result) {
+      console.log("Notifications are: " + result);
+    });
+
     var bbUser;
     if (typeof $.cookie('bbUser') === 'undefined'){
       // similar behavior as an HTTP redirect
@@ -48,6 +54,16 @@
             //alert browser title
             if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0) {
               document.title = 'bblink (o_o) NewMsg!!!';
+
+              //push a browswer notification if supported.
+              if ("Notification" in window) {
+                if (Notification.permission === "granted") {
+                  var img = 'favicon.ico';
+                  var text = msgExisting[msgExisting.length - 1].body;
+                  var notification = new Notification(msgExisting[msgExisting.length - 1].username, { body: text, icon: img });
+                  setTimeout(notification.close.bind(notification), 2000);    
+                }                  
+              }            
             }  
           }
             

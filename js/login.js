@@ -1,14 +1,5 @@
 $(document).ready(function() {
 
-    Notification.requestPermission().then(function(result) {
-      console.log(result);
-    });
-
-    var img = 'bblink.ico';
-    var text = 'Wassup dog haha wo ping ching chila long long bong gonb';
-    var notification = new Notification('T Gizzle da Wrapper', { body: text, icon: img });
-    setTimeout(notification.close.bind(notification), 4000);
-    
   $('#lg_username').val('');
   $('#lg_room').val('');
   $('#lg_avatar').val('');  
