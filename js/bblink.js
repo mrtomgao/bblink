@@ -5,9 +5,11 @@
   $(document).ready(function() {
 
     //Browser Push Notifications
-    Notification.requestPermission().then(function(result) {
-      console.log("Notifications are: " + result);
-    });
+    if ("Notification" in window) {
+      Notification.requestPermission().then(function(result) {
+        console.log("Notifications are: " + result);
+      });
+    }
 
     var bbUser;
     if (typeof $.cookie('bbUser') === 'undefined'){
@@ -50,7 +52,7 @@
               pulseActivity = 0;              
               console.log('added to msgExisting: ' + obj._id);        
             }                       
-          });            
+          });     
 
           if (pulseSinceNew == 0 && msgExisting.length > 0) {
 
@@ -181,7 +183,8 @@
   }
 
   function getNewMsg(bbUser, startDate) {
-  startDate.setSeconds(startDate.getSeconds() - 20);
+  startDate.setSeconds(startDate.getSeconds() - 20);  
+  console.log(startDate);
   return $.ajax
     ({
       url: "https://bblinkapi.azurewebsites.net/msg",      
