@@ -56,7 +56,7 @@
             //scroll to bottom smoothly when new msg
             $('#idReader').animate({scrollTop: $('#idReader')[0].scrollHeight}, 'fast');
             //alert browser title
-            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID) {
+            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID && pulseLastNotifyID != 'undefined') {
               
               document.title = 'bblink  (o_o) NewMsg!!';                                
               console.log("before: " + pulseLastNotifyID + firstRun);
