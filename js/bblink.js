@@ -36,7 +36,7 @@
     var pulseSinceNew = 0;    
     var pulseActivity = 0;  
     var pulseTimeOut;
-    var pulseLastNotifyID;    
+    var pulseLastNotifyID = '';    
 
     function buildMsgList() {   
         pulseSinceNew++; 
@@ -53,22 +53,32 @@
           });            
 
           if (pulseSinceNew == 0 && msgExisting.length > 0) {
+
             //scroll to bottom smoothly when new msg
             $('#idReader').animate({scrollTop: $('#idReader')[0].scrollHeight}, 'fast');
-            //alert browser title
-            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID && pulseLastNotifyID != 'undefined') {
+
+            //alert browser title if NEW MSG conditions met
+            if (firstRun) {
+              pulseLastNotifyID = msgExisting[msgExisting.length - 1]._id;
+            }            
+            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID) {
               
               document.title = 'bblink  (o_o) NewMsg!!';                                
-              console.log("before: " + pulseLastNotifyID + firstRun);
               pulseLastNotifyID = msgExisting[msgExisting.length - 1]._id;
-              console.log("after: " + pulseLastNotifyID + firstRun);
-              //push a browswer notification if supported.
+
+              //push a browswer notification if supported and is not running from file:.
               if ("Notification" in window) {
                 if (Notification.permission === "granted") {
-                  var img = 'favicon.ico';
-                  var text = msgExisting[msgExisting.length - 1].body;
-                  var notification = new Notification(msgExisting[msgExisting.length - 1].username, { body: text, icon: img });
-                  setTimeout(notification.close.bind(notification), 2000);    
+                  if (window.location.protocol != "file:") {
+                    var img = 'favicon.ico';
+                    var text = msgExisting[msgExisting.length - 1].body;
+                    var notification = new Notification(msgExisting[msgExisting.length - 1].username, { body: text, icon: img });
+                    setTimeout(notification.close.bind(notification), 2000); 
+                  } 
+                  else {
+                    console.log('Notification bypassed due to protocol:' + window.location.protocol);
+                  }
+
                 }                  
               }            
             }  
