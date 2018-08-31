@@ -5,9 +5,10 @@ $(document).ready(function() {
     });
 
     var img = 'favicon.ico';
-    var text = 'HEY! notification try';
-    var notification = new Notification('To do list', { body: text, icon: img });
-  
+    var text = 'Wassup dog haha wo ping ching chila long long bong gonb';
+    var notification = new Notification('T Gizzle da Wrapper', { body: text, icon: img });
+    setTimeout(notification.close.bind(notification), 4000);
+    
   $('#lg_username').val('');
   $('#lg_room').val('');
   $('#lg_avatar').val('');  
