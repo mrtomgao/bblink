@@ -4,18 +4,6 @@
 
   $(document).ready(function() {
 
-
-    var socket = io();
-    socket.connect('https://bblinkapi.azurewebsites.net');    
-
-    socket.on('connect', function(data) {
-      console.log('success' + data);
-    });
-
-    socket.on('connect_error', function(data) {
-      console.log('connect error' + data);
-    });    
-
     //Browser Push Notifications
     if ("Notification" in window) {
       Notification.requestPermission().then(function(result) {
