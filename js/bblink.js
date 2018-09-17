@@ -1,7 +1,3 @@
-  window.onfocus = window.onblur = function(e) {
-      document.title = 'bblink  (-_-)....zZZ';
-  }
-
   $(document).ready(function() {
 
     //Browser Push Notifications
@@ -16,7 +12,7 @@
       // similar behavior as an HTTP redirect
       window.location.replace("login.html");
     } else {      
-      console.log("Current login cookie is: " + $.cookie("bbUser"));
+      //console.log("Current login cookie is: " + $.cookie("bbUser"));
       bbUser = JSON.parse($.cookie('bbUser'));
       $("body").fadeIn(1000);
     }
@@ -24,34 +20,31 @@
     //clear the Send Message Box
     $("#idMessageBox").val('');
     
+    //init empty first run vars
     var firstRun = true;  
+    var dtLastGet;      
     var msgExisting = [];
-    var msgNew = [];
-    
-    var dtLastGet = new Date();
-        dtLastGet.setDate(dtLastGet.getDate()-2);
-
-    console.log('bblink started with LastGet: ' + dtLastGet);
+    var msgNew = [];            
 
                    // 2s    5s    10s    30s    1min   2min    5min    10min   15min   30min    1hr
     var pulseRates = [2000, 5000, 10000, 30000, 60000, 120000, 300000, 600000, 900000, 1800000, 3600000];
-    var pulseSinceNew = 0;    
-    var pulseActivity = 0;  
-    var pulseTimeOut;
-    var pulseLastNotifyID = '';    
+    var pulseSinceNew = 0;     
+    var pulseLastNotifyID = '';      
+    var pulseActivity = 0;
+    var pulseTimeOut;       
 
     function buildMsgList() {   
         pulseSinceNew++; 
         //1. main get async
         getNewMsg(bbUser, dtLastGet).done(function (result) {
           $.each( result, function( i, obj ){ 
-            if (!containsMsgID(obj,msgExisting)) {
+            if (!containsMsgID(obj, msgExisting)) {
               msgExisting.push(obj);
               pushHTML(bbUser, obj);
               pulseSinceNew = 0;
               pulseActivity = 0;              
-              console.log('added to msgExisting: ' + obj._id);        
-            }                       
+              //console.log('added to msgExisting: ' + obj._id);        
+            }                                  
           });     
 
           if (pulseSinceNew == 0 && msgExisting.length > 0) {
@@ -74,13 +67,12 @@
                   if (window.location.protocol != "file:") {
                     var img = 'favicon.ico';
                     var text = msgExisting[msgExisting.length - 1].body;
-                    var notification = new Notification(msgExisting[msgExisting.length - 1].username, { body: text, icon: img });
-                    setTimeout(notification.close.bind(notification), 2000); 
+                    var notification = new Notification(msgExisting[msgExisting.length - 1].username, { body: text, icon: img, silent: true });
+                    setTimeout(notification.close.bind(notification), 4000); 
                   } 
                   else {
-                    console.log('Notification bypassed due to protocol:' + window.location.protocol);
+                    console.log('Notification bypassed due to protocol ' + window.location.protocol);
                   }
-
                 }                  
               }            
             }  
@@ -91,8 +83,10 @@
 
         //2. pulse calculator to determine activity spikes
         if (pulseSinceNew >= 10) {
-          console.log('activity lvl change to: ' + pulseActivity);
-          if (pulseActivity < pulseRates.length) { pulseActivity++; }
+          if (pulseActivity < pulseRates.length) {
+            pulseActivity++; 
+            console.log('activity lvl change to: ' + pulseActivity);
+          }
           pulseSinceNew = 0;
         }         
         
@@ -125,6 +119,7 @@
               buildMsgList();
               pulseTimeOut = setTimeout(pulse, pulseRates[pulseActivity]);
           })();           
+          pulseSinceNew = 0;
         });
       }      
     });
@@ -142,6 +137,18 @@
       $.removeCookie("bbUser", { path: '/' });
       window.location.replace("login.html");
     });     
+
+    //setting a reset for timer and NewMsg title when user checks in on window
+    window.onfocus = window.onblur = function(e) {
+        document.title = 'bblink  (-_-)....zZZ';
+        clearTimeout(pulseTimeOut);  
+        pulseActivity = 0;
+        (function pulse() {                
+            buildMsgList();
+            pulseTimeOut = setTimeout(pulse, pulseRates[pulseActivity]);
+        })();             
+        pulseSinceNew = 0; 
+    }    
 
   });
 
@@ -183,25 +190,48 @@
   }
 
   function getNewMsg(bbUser, startDate) {
-  startDate.setSeconds(startDate.getSeconds() - 20);
-  return $.ajax
-    ({
-      url: "https://bblinkapi.azurewebsites.net/msg",      
-      type: "GET",
-      data: {"startdate": startDate.toISOString(), "room": bbUser.room}
-    });
-  }
+
+    if (startDate == null) {
+      var history = 20;
+      console.log('Getting history: ' + history);
+      try {
+        return $.ajax
+          ({
+            url: "https://bblinkapi.azurewebsites.net/msg/latest",      
+            type: "GET",
+            data: {"amount": history, "room": bbUser.room}
+          });   
+      }
+      catch(err) {
+        console.log(err);
+      }    
+    }
+    else {
+      startDate.setSeconds(startDate.getSeconds() - 20);
+      try {
+        return $.ajax
+          ({
+            url: "https://bblinkapi.azurewebsites.net/msg",      
+            type: "GET",
+            data: {"startdate": startDate.toISOString(), "room": bbUser.room}
+          });  
+      }
+      catch(err) {
+        console.log(err);
+      }  
+    }
+  }  
 
   function postNewMsg(bbUser, msgbody) {
-  return $.ajax({
-    type: "POST",
-    contentType: "application/x-www-form-urlencoded",
-    url: "https://bblinkapi.azurewebsites.net/msg",     
-    data: { body: msgbody.trim(), username: bbUser.username, room: bbUser.room, avatar: bbUser.avatar },
-    success: function(data) { console.log("success", data._id); },
-     error: function(data) { console.log("error ", data.error); },
-     dataType: "json" 
-   });
+    return $.ajax({
+      type: "POST",
+      contentType: "application/x-www-form-urlencoded",
+      url: "https://bblinkapi.azurewebsites.net/msg",     
+      data: { body: msgbody.trim(), username: bbUser.username, room: bbUser.room, avatar: bbUser.avatar },
+      success: function(data) { console.log("success", data._id); },
+       error: function(data) { console.log("error ", data.error); },
+       dataType: "json" 
+     });
   }
 
   function pushHTML(bbUser, obj) {
@@ -220,7 +250,7 @@
       "<div class=received_withd_msg>" +            
       "<span class=username>" + obj.username + "</span>&nbsp;" +       
       "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +           
-      "<p>" + obj.body + "</p>" +
+      "<p>" + filterHTML(obj.body) + "</p>" +
       "</div></div></div>";
     } 
     else 
@@ -230,11 +260,50 @@
       "<div class=sent_msg>" +     
       "<span class=username>" + obj.username + "</span>&nbsp;" +       
       "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +         
-      "<p>" + obj.body + "</p>" +       
+      "<p>" + filterHTML(obj.body) + "</p>" +       
       "</div></div>";
     }
     $(msgBody).appendTo("#idReader");
     //$('#idReader').scrollTop($('#idReader')[0].scrollHeight, 5000, 'linear');    
+  }
+
+  function filterHTML(body) {
+    var parsedBody = "";
+    var res = body.split(" ");
+    for (i = 0; i < res.length; i++) {
+      if(res[i].substring(0,7).toLowerCase() == 'http://' || res[i].substring(0,8).toLowerCase() == 'https://')
+      {
+        if(/\.(jpg|gif|png|bmp|jpeg)$/.test(res[i]))
+        {
+          parsedBody += "<img src=" + res[i] + "> ";
+        }
+        else 
+        {
+          var domain = res[i].substring(res[i].indexOf('://') + 3);
+          if (domain.indexOf('/') > 0)
+          {
+            domain = domain.substring(0, domain.indexOf('/'));
+          }          
+          if (domain.substring(0,3) == 'www')
+          {
+            domain = domain.substring(4);
+          }
+          if (domain != '') 
+          {
+            parsedBody += "<a href=" + res[i] + " target=_blank><i class='fa fa-external-link' aria-hidden=true></i> " + domain + "</a> ";
+          }
+          else
+          {
+            parsedBody += res[i] + " ";
+          }                              
+        }
+      }
+      else 
+      {
+        parsedBody += res[i] + " ";
+      }          
+    }
+    return parsedBody;
   }
 
 

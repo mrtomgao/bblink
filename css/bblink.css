@@ -6,11 +6,21 @@ body {
 }
 /*=== 2. Anchor Link ===*/
 a {
+  font-size: 11px;
   color: #aaaaaa;
-  transition: all ease-in-out 200ms;
 }
 a:hover {
+  font-size: 11px;
   color: #333333;
+  font-weight: bold;
+  text-decoration: none;
+}
+.parsedlink a {
+  color: #159AE1;
+  transition: all ease-in-out 200ms;  
+}
+.inline-link a:hover {
+  color: #78D0FF;
   text-decoration: none;
 }
 /*=== 3. Text Outside the Box ===*/
@@ -345,8 +355,10 @@ img{ max-width:100%;}
   color: #4c4c4c;
   font-size: 15px;
   min-height: 48px;
-  width: 96%;
+  padding-right: 40px;
+  width: 100%;
 }
+
 .write_msg::-ms-clear {
   display: none;
 }
