@@ -14,7 +14,6 @@ a:hover {
   white-space: nowrap;
   font-size: 11px;
   color: #333333;
-  font-weight: bold;
   text-decoration: none;
 }
 
@@ -303,18 +302,17 @@ img{ max-width:100%;}
 }
 .received_msg {
  display: inline-block;  
- width: 57%;
+ max-width: 70%;
  text-align: left;
 }
 .received_msg p {
   text-align: left;  
-  background: #ebebeb none repeat scroll 0 0;
-  border-radius: 3px;
+  background: #e8e8e8 none repeat scroll 0 0;
+  border-radius: 10px;
   color: #646464;
   font-size: 14px;
   margin: 0;
   padding: 5px 10px 5px 12px;
-  width: 100%;
 }
 .sent_msg_img {
   float: right;
@@ -324,16 +322,15 @@ img{ max-width:100%;}
 .sent_msg {
   text-align: right;
   float: right;
-  width: 57%;
+  max-width: 70%;
 }
 .sent_msg p {
   background: #05728f none repeat scroll 0 0;
-  border-radius: 3px;
+  border-radius: 10px;
   text-align: left;
   font-size: 14px;
   margin: 0; color:#fff;
   padding: 5px 10px 5px 12px;
-  max-width: 100%;
 }
 .incoming_msg{ 
   overflow: hidden; margin:14px 0px 14px 0px;
