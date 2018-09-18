@@ -192,7 +192,7 @@
   function getNewMsg(bbUser, startDate) {
 
     if (startDate == null) {
-      var history = 20;
+      var history = 40;
       console.log('Getting history: ' + history);
       try {
         return $.ajax
@@ -245,13 +245,12 @@
      if (obj.username != bbUser.username) 
      {
       msgBody = "<div id=" + obj._id + " class=incoming_msg>" +
-      "<div class=incoming_msg_img>" + showAvatarHtml + "</div>" +
-      "<div class=received_msg>" +      
-      "<div class=received_withd_msg>" +            
+      "<div class=received_msg_img>" + showAvatarHtml + "</div>" +
+      "<div class=received_msg>" +               
       "<span class=username>" + obj.username + "</span>&nbsp;" +       
       "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +           
       "<p>" + filterHTML(obj.body) + "</p>" +
-      "</div></div></div>";
+      "</div></div>";
     } 
     else 
     {
