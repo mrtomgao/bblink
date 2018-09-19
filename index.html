@@ -11,24 +11,32 @@
     <script src="js/bblink.js"></script>    
   </head>
   <body style="display: none">
-    <div class="container">
-      <div class="user_controls"><button class="logout_btn" id="idLogout" type="button"><div class="showbefore"><i class="fa fa-sign-out" aria-hidden="true"></i></div><div class="showafter"><i class="fa fa-hand-peace-o" aria-hidden="true"></i> &nbsp;logout</div></button></div>
-      <div class="logo text-center">bblink <span class="logo_sml">by Tgao</span></div>      
-      <div class="messaging">
-            <div class="mesgs">
-              <div class="msg_history" id="idReader">
-                <!-- Message javascript appends here -->
-              </div>
-              <div class="type_msg">
-                <div class="input_msg_write">
-                  <input type="text" class="write_msg" placeholder="Type a message" id="idMessageBox" />
-                  <button class="msg_send_btn" id="idSend" type="button"><i class="fa fa-comment-o" aria-hidden="true"></i></button>
-                </div>
-              </div>
+    <div class="container">    
+      <!-- Beg. Header Region -->  
+        <div class="user_controls">
+          <button class="logout_btn" id="idLogout" type="button"><div class="showbefore"><i class="fa fa-sign-out" aria-hidden="true"></i></div><div class="showafter"><i class="fa fa-hand-peace-o" aria-hidden="true"></i> &nbsp;logout</div>
+          </button>
+        </div>
+        <div class="logo text-left">bb<i class="fa fa-link" aria-hidden="true"></i></div>
+      <!-- End. Header Region -->  
 
+      <!-- Beg. Messaging Region -->
+        <div class="messaging">
+          <div class="mesgs">
+            
+            <div class="msg_history" id="idReader">
+            <!-- Message javascript appends here -->
             </div>
 
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <input type="text" class="write_msg" placeholder="Type a message" id="idMessageBox" />
+                <button class="msg_send_btn" id="idSend" type="button"><i class="fa fa-comment-o" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
         </div>
+      <!-- End. Messaging Region -->        
     </div>
   </body>
 </html>

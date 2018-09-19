@@ -207,11 +207,10 @@ label.form-invalid:after {
   font-weight: bold;
 }
 .logo_sml {
-  font-size: 18px;
+  font-size: 21px;
   color: #aaaaaa;
   font-weight: normal;
 }
-
 .container{max-width:96%; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {
@@ -403,7 +402,7 @@ textarea:focus, input:focus, button:focus{
   overflow-y: auto;
 }
 .user_controls {
-  float: right;
+  float:right;
 }
 .logout_btn {
   overflow: hidden;
