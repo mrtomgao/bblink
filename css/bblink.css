@@ -276,26 +276,26 @@ img{ max-width:100%;}
 
 .username {
   color: #5CB6DF;
-  text-align: right;
+  text-align: right;  
   display: inline-block;
   font-size: 12px;
   font-weight: bold;
-  margin: 0px 0 0;
+  margin: 0 0 0 0;
 }
-.time_date {
+.time_date { 
   text-align: right;
   color: #747474;
   display: inline-block;
   font-size: 10px;
-  margin: 0px 0 0;
+  margin: 0 0 0 0;
 }
 
 .mesgs {
   float: left;
-  padding: 10px 10px 10px 10pxpx;
   width: 100%;
 }
 .received_msg_img {
+  margin-top: 4px;  
   display: inline-block;
   width: 6%;
   vertical-align: top;
@@ -312,15 +312,18 @@ img{ max-width:100%;}
   color: #646464;
   font-size: 14px;
   margin: 0;
-  padding: 5px 10px 5px 12px;
+  padding: 5px 10px 5px 10px;
 }
 .sent_msg_img {
+  margin-top: 4px;
   float: right;
   display: inline-block;
   width: 6%;
+  vertical-align: top;  
 }
 .sent_msg {
   text-align: right;
+  vertical-align: top;
   float: right;
   max-width: 70%;
 }
@@ -330,15 +333,15 @@ img{ max-width:100%;}
   text-align: left;
   font-size: 14px;
   margin: 0; color:#fff;
-  padding: 5px 10px 5px 12px;
+  padding: 5px 10px 5px 10px;
 }
 .incoming_msg{ 
-  overflow: hidden; margin:14px 0px 14px 0px;
+  overflow: hidden; margin:10px 0px 10px 0px;
   overflow-wrap: break-word; 
-  word-wrap: break-word;  
+  word-wrap: break-word;
 }
 .outgoing_msg{ 
-  overflow: hidden; margin:14px 0px 14px 0px;
+  overflow: hidden; margin:10px 0px 10px 0px;
   overflow-wrap: break-word; 
   word-wrap: break-word;
 }

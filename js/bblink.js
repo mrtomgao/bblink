@@ -234,6 +234,11 @@
      });
   }
 
+  function niceDate(d) {
+
+    return d.toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'});
+  }
+
   function pushHTML(bbUser, obj) {
     var createDate = new Date(obj.Created_date);
     var showAvatarHtml = '';
@@ -248,7 +253,7 @@
       "<div class=received_msg_img>" + showAvatarHtml + "</div>" +
       "<div class=received_msg>" +               
       "<span class=username>" + obj.username + "</span>&nbsp;" +       
-      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +           
+      "<span class=time_date>" + niceDate(createDate) + "</span>" +           
       "<p>" + filterHTML(obj.body) + "</p>" +
       "</div></div>";
     } 
@@ -258,7 +263,7 @@
       "<div class=sent_msg_img>" + showAvatarHtml + "</div>" +                                  
       "<div class=sent_msg>" +     
       "<span class=username>" + obj.username + "</span>&nbsp;" +       
-      "<span class=time_date>" + timeAgo(createDate) + " ago</span>" +         
+      "<span class=time_date>" + niceDate(createDate) + "</span>" +         
       "<p>" + filterHTML(obj.body) + "</p>" +       
       "</div></div>";
     }
