@@ -17,6 +17,36 @@ a:hover {
   text-decoration: none;
 }
 
+/*=== twee mojis ===*/
+ul.emoji-list * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+ul.emoji-list li {
+  font-size: 36px;
+  float: left;
+  display: inline-block;
+  padding: 2px;
+  margin: 4px;
+}
+img.emoji {
+  display: inline !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 1em !important;
+  width: 1em !important;
+  margin: 0 .07em !important;
+  vertical-align: -0.1em !important;
+  background: none !important;
+  padding: 0 !important;
+}
+.emojis {
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
 /*=== 3. Text Outside the Box ===*/
 .etc-login-form {
   color: #919191;
@@ -364,6 +394,22 @@ textarea:focus, input:focus, button:focus{
 }
 
 .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+
+.emoji_picker {
+  background-color: rgba(255, 255, 255, 0.0);
+  border: medium none;
+  border-radius: 50%;
+  color: #000000;
+  cursor: pointer;
+  font-size: 16px;
+  height: 22px;
+  position: absolute;
+  right: 38px;
+  top: 10px;
+  width: 22px;
+  transition: all ease-in-out 100ms;    
+}
+
 .msg_send_btn {
   background: #aaaaaa none repeat scroll 0 0;
   border: medium none;

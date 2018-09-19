@@ -4,10 +4,13 @@
     <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>    
     <link href="css/bblink.css" type="text/css" rel="stylesheet"/>
-	  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">    
+	  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">        
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>         
+    <link href="css/lsxemojipicker.css" rel="stylesheet">    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://twemoji.maxcdn.com/2/twemoji.min.js" integrity="sha384-vojMYWMgmEhE4UFyXarYAx15WrGwFWfYep8svrRf1anCUzrYn9xlhuXrK9fgsixc" crossorigin="anonymous"></script>
+    <script src="js/lsxemojipicker.js"></script>
     <script src="js/bblink.js"></script>    
   </head>
   <body style="display: none">
@@ -19,18 +22,16 @@
         </div>
         <div class="logo text-left">bb<i class="fa fa-link" aria-hidden="true"></i></div>
       <!-- End. Header Region -->  
-
       <!-- Beg. Messaging Region -->
         <div class="messaging">
-          <div class="mesgs">
-            
+          <div class="mesgs">            
             <div class="msg_history" id="idReader">
             <!-- Message javascript appends here -->
             </div>
-
             <div class="type_msg">
               <div class="input_msg_write">
                 <input type="text" class="write_msg" placeholder="Type a message" id="idMessageBox" />
+                <button class="emoji_picker"><i class="fa fa-smile-o" aria-hidden="true"></i></button>
                 <button class="msg_send_btn" id="idSend" type="button"><i class="fa fa-comment-o" aria-hidden="true"></i></button>
               </div>
             </div>
@@ -38,5 +39,18 @@
         </div>
       <!-- End. Messaging Region -->        
     </div>
+    <script>
+        $('.emoji_picker').lsxEmojiPicker({
+            closeOnSelect: true,
+            twemoji: true,
+            onSelect: function(emoji){
+                $('#idMessageBox').focus();
+                $('#idMessageBox').val($('#idMessageBox').val() + emoji.value);
+            }
+        });
+    </script> 
+    <script>
+      twemoji.parse(document.body);
+    </script>       
   </body>
 </html>
