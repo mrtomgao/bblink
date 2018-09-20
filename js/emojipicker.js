@@ -636,17 +636,7 @@ if(typeof jQuery !== 'undefined'){
                 {'name': 'circus-tent', 'value': '&#x1f3aa'},
                 {'name': 'performing-arts', 'value': '&#x1f3ad'},
                 {'name': 'round-pushpin', 'value': '&#x1f4cd'},
-                {'name': 'triangular-flag-on-post', 'value': '&#x1f6a9'},
-                {'name': 'cn', 'value': '&#x1f1e8;&#x1f1f3'},
-                {'name': 'de', 'value': '&#x1f1e9;&#x1f1ea'},
-                {'name': 'es', 'value': '&#x1f1ea;&#x1f1f8'},
-                {'name': 'fr', 'value': '&#x1f1eb;&#x1f1f7'},
-                {'name': 'gb', 'value': '&#x1f1ec;&#x1f1e7'},
-                {'name': 'it', 'value': '&#x1f1ee;&#x1f1f9'},
-                {'name': 'jp', 'value': '&#x1f1ef;&#x1f1f5'},
-                {'name': 'kr', 'value': '&#x1f1f0;&#x1f1f7'},
-                {'name': 'ru', 'value': '&#x1f1f7;&#x1f1fa'},
-                {'name': 'us', 'value': '&#x1f1fa;&#x1f1f8'}
+                {'name': 'triangular-flag-on-post', 'value': '&#x1f6a9'}
             ]
         }
     
@@ -658,7 +648,6 @@ if(typeof jQuery !== 'undefined'){
             settings = $.extend({
                 width: 220,
                 height: 200,
-                twemoji: false,
                 closeOnSelect: true,
                 onSelect: function(em){}
             }, options);
@@ -751,16 +740,7 @@ if(typeof jQuery !== 'undefined'){
             wrapper.append(tabs);
             container.append(wrapper);
             appender.append(container);
-            this.append(appender);
-    
-            
-            if(settings.twemoji){
-                twemoji.parse(emojiPeopleContainer[0], {size: 72});
-                twemoji.parse(emojiNatureContainer[0], {size: 72});
-                twemoji.parse(emojiPlaceContainer[0], {size: 72});
-                twemoji.parse(emojiObjectContainer[0], {size: 72});
-                twemoji.parse(tabs[0], {size: 72});
-            }
+            this.append(appender);            
     
             this.click(function(e){
                 e.preventDefault();

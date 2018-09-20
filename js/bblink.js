@@ -274,14 +274,19 @@
     var parsedBody = "";
     var res = body.split(" ");
     for (i = 0; i < res.length; i++) {
+
+      //link detected
       if(res[i].substring(0,7).toLowerCase() == 'http://' || res[i].substring(0,8).toLowerCase() == 'https://')
       {
+        //link image detected 
         if(/\.(jpg|gif|png|bmp|jpeg)$/.test(res[i]))
         {
           parsedBody += "<img src=" + res[i] + "> ";
+          continue;
         }
         else 
         {
+          //link url detected
           var domain = res[i].substring(res[i].indexOf('://') + 3);
           if (domain.indexOf('/') > 0)
           {
@@ -294,17 +299,21 @@
           if (domain != '') 
           {
             parsedBody += "<a href=" + res[i] + " target=_blank><i class='fa fa-external-link' aria-hidden=true></i> " + domain + "</a> ";
-          }
-          else
-          {
-            parsedBody += res[i] + " ";
-          }                              
+            continue;
+          }                           
         }
       }
-      else 
+
+      //emoji detected
+      if(res[i].substring(0,2).toLowerCase() == '&#') 
       {
-        parsedBody += res[i] + " ";
-      }          
+        parsedBody += "<span class=emoji>" + res[i] + "</span>";
+        continue;
+      }
+
+      //no conditions met just add the original
+      parsedBody += res[i] + " ";
+            
     }
     return parsedBody;
   }
