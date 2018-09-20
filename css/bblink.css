@@ -1,7 +1,7 @@
 html,
 body {
   background: #efefef;
-  padding: 10px;
+  padding: 0px;
   font-family: 'Open Sans', sans-serif;
 }
 /*=== 2. Anchor Link ===*/
@@ -224,7 +224,11 @@ label.form-invalid:after {
   color: #aaaaaa;
   font-weight: normal;
 }
-.container{max-width:96%; margin:auto;}
+.container{
+  max-width:96%; 
+  margin:auto;
+}
+
 img{ max-width:100%;}
 .inbox_people {
   background: #f8f8f8 none repeat scroll 0 0;
@@ -429,7 +433,9 @@ textarea:focus, input:focus, button:focus{
   right: 33px;
   opacity: 0.0;
 }
-.messaging { padding: 0 0 0px 0;}
+.messaging { 
+  padding: 8px 0 0px 0;
+}
 .msg_history {
   height: 80%;
   overflow-y: auto;
