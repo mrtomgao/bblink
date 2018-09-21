@@ -383,8 +383,9 @@ img{ max-width:100%;}
 .write_msg::-ms-clear {
   display: none;
 }
-[contenteditable="true"].single-line::-ms-clear {
-  display: none;
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
 }
 [contenteditable="true"].single-line {
 
