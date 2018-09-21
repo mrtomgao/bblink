@@ -28,7 +28,8 @@
             </div>
             <div class="type_msg">
               <div class="input_msg_write">
-                <input contenteditable="true" type="text" class="write_msg" placeholder="Type a message" id="idMessageBox" />
+                <!-- <input type="text" class="write_msg" placeholder="Type a message" id="idMessageBox" /> -->
+                <div class="write_msg single-line" placeholder="Type a message..." id="idMessageBox" contenteditable="true"></div>
                 <button class="emoji_btn">&#x1f4a9;</button>
                 <button class="msg_send_btn" id="idSend" type="button"><i class="fa fa-comment-o" aria-hidden="true"></i></button>
               </div>
@@ -42,7 +43,7 @@
             closeOnSelect: true,
             onSelect: function(emoji){
                 $('#idMessageBox').focus();
-                $('#idMessageBox').val($('#idMessageBox').val() + emoji.value);
+                pasteHtmlAtCaret(emoji.value);
             }
         });
     </script>

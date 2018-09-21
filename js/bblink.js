@@ -102,9 +102,9 @@
 
     //Send click main function
     $("#idSend").click(function() {
-      var msgbody = $("#idMessageBox").val().trim();
+      var msgbody = stripHTML($("#idMessageBox").html().trim());
       //clear textbox immediately
-      $("#idMessageBox").val('');      
+      $("#idMessageBox").html('');      
       if (msgbody != '') {
         $(".msg_send_btn").toggleClass("msg_send_btn_clicked");
         postNewMsg(bbUser, msgbody).done(function (result) {  
@@ -304,11 +304,20 @@
         }
       }
 
-      //emoji detected
-      if(res[i].substring(0,2).toLowerCase() == '&#') 
-      {
-        parsedBody += "<span class=emoji>" + res[i] + "</span>";
-        continue;
+      //unicode detected for emoji enlargement
+      if (/[^\u0000-\u00ff]/.test(res[i])) { 
+        var sBuild = "";
+        for (var x = 0; x < res[i].length; x++) {
+          if (/[^\u0000-\u00ff]/.test(res[i].charAt(x))) {
+            sBuild += "<span class=emoji>" + res[i].substring(x, x + 2) + "</span>";
+            break;
+          }
+          else {
+            sBuild += res[i].charAt(x);
+          }
+        }
+        parsedBody += sBuild;
+        continue;   
       }
 
       //no conditions met just add the original
@@ -316,6 +325,12 @@
             
     }
     return parsedBody;
+  }
+
+  function stripHTML(html) {
+      var tempDiv = document.createElement("DIV");
+      tempDiv.innerHTML = html.replace('&nbsp;',' ');
+      return tempDiv.innerText;
   }
 
 

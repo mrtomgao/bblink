@@ -375,9 +375,31 @@ img{ max-width:100%;}
   padding-right: 40px;
   width: 100%;
 }
-
+.write_msg {
+  padding: 14px 0px 0px 0px;
+  overflow: hidden;
+  margin-right: 60px;
+}
 .write_msg::-ms-clear {
   display: none;
+}
+[contenteditable="true"].single-line {
+
+        white-space: nowrap;
+        overflow: hidden;
+} 
+[contenteditable="true"].single-line br {
+    display:none;
+    
+}
+[contenteditable="true"].single-line * {
+    display:inline;
+    white-space:nowrap;
+}
+[contenteditable="true"]:empty::before {
+  color: #aaa;
+  content: attr(placeholder);
+  caret-color: red;
 }
 
 textarea:focus, input:focus, button:focus{
