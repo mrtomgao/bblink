@@ -310,7 +310,7 @@
         for (var x = 0; x < res[i].length; x++) {
           if (/[^\u0000-\u00ff]/.test(res[i].charAt(x))) {
             sBuild += "<span class=emoji>" + res[i].substring(x, x + 2) + "</span>";
-            break;
+            x++;    
           }
           else {
             sBuild += res[i].charAt(x);
