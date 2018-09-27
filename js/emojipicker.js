@@ -1,8 +1,3 @@
-
-if(typeof jQuery !== 'undefined'){
-    (function ($, win) {
-        'use strict';
-    
         var emoji = {
             'people': [
                 {'name': 'smile', 'value': '&#x1f604'},
@@ -639,6 +634,10 @@ if(typeof jQuery !== 'undefined'){
                 {'name': 'triangular-flag-on-post', 'value': '&#x1f6a9'}
             ]
         }
+
+if(typeof jQuery !== 'undefined'){
+    (function ($, win) {
+        'use strict';
     
         var settings = {};
     

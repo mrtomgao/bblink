@@ -31,7 +31,7 @@
     var pulseSinceNew = 0;     
     var pulseLastNotifyID = '';      
     var pulseActivity = 0;
-    var pulseTimeOut;       
+    var pulseTimeOut;         
 
     function buildMsgList() {   
         pulseSinceNew++; 
@@ -102,12 +102,15 @@
 
     //Send click main function
     $("#idSend").click(function() {
-      var msgbody = stripHTML($("#idMessageBox").html().trim());
+      var msgbody = $("#idMessageBox").html().trim().replace(/<[^>]+>/g, '');      
       //clear textbox immediately
       $("#idMessageBox").html('');      
-      if (msgbody != '') {
+      if (msgbody.trim() != '') {
+
+        var filteredMsgBody = filterInput(msgbody);
+
         $(".msg_send_btn").toggleClass("msg_send_btn_clicked");
-        postNewMsg(bbUser, msgbody).done(function (result) {  
+        postNewMsg(bbUser, filteredMsgBody).done(function (result) {  
 
           $(".msg_send_btn").removeClass("msg_send_btn_clicked");
           //reset pulse and activity level
@@ -149,7 +152,6 @@
         })();             
         pulseSinceNew = 0; 
     }    
-
   });
 
   //#### Begin External Functions #### //
@@ -236,7 +238,7 @@
 
   function niceDate(d) {
     return d.toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'});
-  }
+  }  
 
   function pushHTML(bbUser, obj) {
     var createDate = new Date(obj.Created_date);
@@ -327,12 +329,54 @@
     return parsedBody;
   }
 
-  function stripHTML(html) {
-      var tempDiv = document.createElement("DIV");
-      tempDiv.innerHTML = html.replace('&nbsp;',' ');
-      return tempDiv.innerText;
+  function filterInput(s) {
+    var parsedBody = "";
+    var res = s.replace(/&nbsp;/g,' ').split(/\s{1}/);
+
+    res.forEach(async (itm) => {
+      var raw = itm.trim();
+      if (raw.substring(0,1) == ":" && raw.substring(raw.length - 1, raw.length) == ":" && raw.length > 1) {
+        var trimmed = raw.substring(1, raw.length - 1); 
+        var found = emojiFind(trimmed);
+
+        if (found != null) {
+          parsedBody += emojiConvert(found) + ' ';
+        }
+        else {
+          parsedBody += raw + ' ';
+        }      
+      } 
+      else
+      {
+        parsedBody += raw + ' ';
+      }   
+    });
+    return parsedBody;    
   }
 
+  function emojiConvert(html) {
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.innerText || tmp.textContent;
+  }
 
+  function emojiFind(emojiName) {
+    //emoji var is dependent on emojipicker.js
+    var keys = Object.keys(emoji).toString().split(',');
+    var arrChild;
+    for (i = 0; i < keys.length; i++) {        
+      arrChild = emoji[keys[i]];
 
+      for (var x=0; x < arrChild.length; x++) {
+        if (arrChild[x].name == emojiName) {
+          //emoji found!!!!   
+          return arrChild[x].value;          
+        }                  
+      }        
+    }
+
+    //nothing found
+    return null;
+  }
+  
 //#### End External Functions #### //
