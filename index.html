@@ -6,8 +6,47 @@
     <link href="css/bblink.css" type="text/css" rel="stylesheet"/>
 	  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">        
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>        
+    <script src="js/emojipicker.js"></script>
+    <script src="js/bblink.js"></script>    
   </head>
-  <body">
-	<h3> R.I.P. </h3>
+  <body style="display: none">
+    <div class="container">    
+      <!-- Beg. Header Region -->  
+        <div class="user_controls">
+          <button class="logout_btn" id="idLogout" type="button"><div class="showbefore"><i class="fa fa-sign-out" aria-hidden="true"></i></div><div class="showafter"><i class="fa fa-hand-peace-o" aria-hidden="true"></i> &nbsp;logout</div>
+          </button>
+        </div>
+        <div class="logo text-left">bblink<i class="fa fa-link" aria-hidden="true"></i></div>
+        
+      <!-- End. Header Region -->  
+      <!-- Beg. Messaging Region -->
+        <div class="messaging">
+          <div class="mesgs">            
+            <div class="msg_history" id="idReader">
+            <!-- Message javascript appends here -->
+            </div>
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <!-- <input type="text" class="write_msg" placeholder="Type a message" id="idMessageBox" /> -->
+                <div class="write_msg single-line" placeholder="Type a message..." id="idMessageBox" contenteditable="true"></div>
+                <button class="emoji_btn">&#x1f4a9;</button>
+                <button class="msg_send_btn" id="idSend" type="button"><i class="fa fa-comment-o" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- End. Messaging Region -->        
+    </div>
+    <script>
+        $('.emoji_btn').lsxEmojiPicker({
+            closeOnSelect: true,
+            onSelect: function(emoji){
+                $('#idMessageBox').focus();
+                pasteHtmlAtCaret(emoji.value);
+            }
+        });
+    </script>
   </body>
 </html>
