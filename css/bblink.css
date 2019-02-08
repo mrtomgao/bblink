@@ -2,7 +2,7 @@ html,
 body {
   background: #efefef;
   padding: 0px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 /*=== 2. Anchor Link ===*/
 a {
@@ -344,7 +344,7 @@ img{ max-width:100%;}
   max-width: 70%;
 }
 .sent_msg p {
-  background: #05728f none repeat scroll 0 0;
+  background: #348091 none repeat scroll 0 0;
   border-radius: 10px;
   text-align: left;
   font-size: 14px;
