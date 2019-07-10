@@ -58,8 +58,17 @@
             }            
             if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID) {
               
+              (function() {
+                  var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+                  link.type = 'image/x-icon';
+                  link.rel = 'shortcut icon';
+                  link.href = 'http://www.stackoverflow.com/favicon.ico';
+                  document.getElementsByTagName('head')[0].appendChild(link);
+              })();       
+                     
               document.title = 'bblink  (o_o) NewMsg!!';                                
               pulseLastNotifyID = msgExisting[msgExisting.length - 1]._id;
+
 
               //push a browswer notification if supported and is not running from file:.
               if ("Notification" in window) {
