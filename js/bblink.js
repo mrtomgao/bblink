@@ -61,7 +61,7 @@
               var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
               link.type = 'image/x-icon';
               link.rel = 'shortcut icon';
-              link.href = 'bblink_new.ico';
+              link.href = 'favicon_1.ico';
               document.getElementsByTagName('head')[0].appendChild(link);
 
               document.title = 'bblink  (o_o) NewMsg!!';                                
@@ -71,7 +71,7 @@
               if ("Notification" in window) {
                 if (Notification.permission === "granted") {
                   if (window.location.protocol != "file:") {
-                    var img = 'bblink_new.ico';
+                    var img = 'favicon_1.ico';
                     var text = msgExisting[msgExisting.length - 1].body;
                     var notification = new Notification(msgExisting[msgExisting.length - 1].username, { body: text, icon: img, silent: true });
                     setTimeout(notification.close.bind(notification), 4000); 
@@ -153,7 +153,7 @@
         var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';
-        link.href = 'bblink.ico';
+        link.href = 'favicon_0.ico';
         document.getElementsByTagName('head')[0].appendChild(link); 
 
         clearTimeout(pulseTimeOut);  
