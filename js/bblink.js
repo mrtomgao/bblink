@@ -19,7 +19,7 @@
 
     //clear the Send Message Box
     $("#idMessageBox").val('');
-    
+                
     //init empty first run vars
     var firstRun = true;  
     var dtLastGet;      
@@ -56,19 +56,16 @@
             if (firstRun) {
               pulseLastNotifyID = msgExisting[msgExisting.length - 1]._id;
             }            
-            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID) {
-              
-              (function() {
-                  var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-                  link.type = 'image/x-icon';
-                  link.rel = 'shortcut icon';
-                  link.href = 'http://www.stackoverflow.com/favicon.ico';
-                  document.getElementsByTagName('head')[0].appendChild(link);
-              })();       
-                     
+            if (bbUser.username != msgExisting[msgExisting.length - 1].username && pulseSinceNew == 0 && firstRun == false && msgExisting[msgExisting.length - 1]._id != pulseLastNotifyID) {                   
+
+              var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+              link.type = 'image/x-icon';
+              link.rel = 'shortcut icon';
+              link.href = 'favicon_newmsg.ico';
+              document.getElementsByTagName('head')[0].appendChild(link);
+
               document.title = 'bblink  (o_o) NewMsg!!';                                
               pulseLastNotifyID = msgExisting[msgExisting.length - 1]._id;
-
 
               //push a browswer notification if supported and is not running from file:.
               if ("Notification" in window) {
@@ -153,6 +150,12 @@
     //setting a reset for timer and NewMsg title when user checks in on window
     window.onfocus = window.onblur = function(e) {
         document.title = 'bblink  (-_-)....zZZ';
+        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = 'favicon.ico';
+        document.getElementsByTagName('head')[0].appendChild(link); 
+               
         clearTimeout(pulseTimeOut);  
         pulseActivity = 0;
         (function pulse() {                
