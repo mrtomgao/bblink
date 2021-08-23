@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $('#lg_username').val('');
   $('#lg_room').val('');
-  $('#lg_avatar').val('https://mrtomgao.github.io/bblink/mosquito.jpg');  
+  $('#lg_avatar').val('');  
   $.removeCookie("bbUser");
 
   console.log("Current login cookie is: " + $.cookie("bbUser"));
